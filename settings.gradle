@@ -1,0 +1,2 @@
+include ':ad_server'
+rootProject.name = "AdblockVM"

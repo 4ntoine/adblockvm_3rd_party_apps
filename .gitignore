@@ -1,0 +1,10 @@
+**/libs/**
+**/build
+**/local.properties
+**/buildtools
+.idea
+*.iml
+.DS_Store
+.*
+!.gitignore
+!.pre-commit-config.yaml
