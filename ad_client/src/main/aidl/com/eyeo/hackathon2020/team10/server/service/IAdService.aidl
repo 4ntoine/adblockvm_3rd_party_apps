@@ -1,4 +1,4 @@
-package com.eyeo.hackathon2020.team10.service;
+package com.eyeo.hackathon2020.team10.server.service;
 
 interface IAdService {
     // return Ad banner URL

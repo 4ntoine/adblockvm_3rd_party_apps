@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.eyeo.hackathon2020.team10.service
+package com.eyeo.hackathon2020.team10.server.service
 
 import android.app.Service
 import android.content.Intent

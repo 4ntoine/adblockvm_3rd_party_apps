@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.eyeo.hackathon2020.team10.server">
+    package="com.eyeo.hackathon2020.team10.client">
 
     <application
         android:allowBackup="true"
@@ -9,15 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".service.AdService"
-            android:exported="true"
-            android:enabled="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAUL" />
-                <action android:name="AdService" />
-            </intent-filter>
-        </service>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

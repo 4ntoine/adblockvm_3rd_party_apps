@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.eyeo.hackathon2020.team10
+package com.eyeo.hackathon2020.team10.client
 
 import android.content.ComponentName
 import android.content.Context
@@ -23,16 +23,15 @@ import android.content.ServiceConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import com.eyeo.hackathon2020.team10.service.AdService
-import com.eyeo.hackathon2020.team10.service.IAdService
+import android.widget.Toast
+import com.eyeo.hackathon2020.team10.server.service.IAdService
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "Activity"
+    private val TAG = "ClientActivity"
     private lateinit var button: Button
     private lateinit var url: TextView
 
@@ -51,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setTitle("ClientActivity")
         bindControls()
         initControls()
         connectService()
@@ -66,9 +66,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun connectService() {
-        val intent = Intent(this, AdService::class.java)
-        intent.action = IAdService::class.java.name
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
+        val intent = Intent("AdService")
+        intent.setPackage("com.eyeo.hackathon2020.team10.server")
+        val message = if (bindService(intent, mConnection, Context.BIND_AUTO_CREATE))
+            "connected" else "failed to connect to ad server"
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun initControls() {

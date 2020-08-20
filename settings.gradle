@@ -1,2 +1,3 @@
 include ':ad_server'
+include ':ad_client'
 rootProject.name = "AdblockVM"
