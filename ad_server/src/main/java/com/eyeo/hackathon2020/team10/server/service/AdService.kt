@@ -18,20 +18,33 @@ package com.eyeo.hackathon2020.team10.server.service
 
 import android.app.Service
 import android.content.Intent
+import android.content.res.Resources
 import android.os.IBinder
 import android.util.Log
+import com.eyeo.hackathon2020.team10.server.R
 import java.util.*
 import kotlin.math.abs
 
-private val binder = object : IAdService.Stub() {
+class Binder(val resources: Resources) : IAdService.Stub() {
     private val random = Random()
+
     override fun getAdUrl(): String {
         val url = "[banner_url_${abs(random.nextInt())}]"
         Log.w("AdService", "$url generated")
         return url
     }
+
+    override fun getAdBitmap(): ByteArray {
+        return resources.openRawResource(R.raw.ad).readBytes()
+    }
 }
 
 class AdService : Service() {
+    private lateinit var binder: Binder
+
+    override fun onCreate() {
+        super.onCreate()
+        binder = Binder(resources)
+    }
     override fun onBind(intent: Intent?): IBinder? = binder
 }
