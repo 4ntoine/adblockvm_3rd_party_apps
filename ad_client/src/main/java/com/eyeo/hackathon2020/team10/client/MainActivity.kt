@@ -26,18 +26,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.eyeo.hackathon2020.team10.server.service.IAdService
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "ClientActivity"
-    private lateinit var button: Button
-    private lateinit var url: TextView
     private lateinit var image: ImageView
+    private lateinit var button: Button
+    private lateinit var lines: EditText
 
     private var adService: IAdService? = null
     private val mConnection = object : ServiceConnection {
@@ -79,14 +76,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initControls() {
-        button.setOnClickListener { requestAd() }
+        button.setOnClickListener { increment() }
     }
 
     private fun requestAd() {
         adService?.let {
-            url.text = it.adUrl
             showImage(it.adBitmap)
         }
+    }
+
+    private var counter = 0
+
+    private fun increment() {
+        lines.text.append("\n${++counter}")
     }
 
     private fun showImage(bitmapBytes: ByteArray) {
@@ -95,8 +97,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindControls() {
-        button = findViewById(R.id.MainActivity_button)
-        url = findViewById(R.id.MainActivity_url)
         image = findViewById(R.id.MainActivity_image)
+        button = findViewById(R.id.MainActivity_button)
+        lines = findViewById(R.id.MainActivity_lines)
     }
 }
